@@ -93,9 +93,9 @@ def get_class_stats(file):
 def parse_args():
     parser = argparse.ArgumentParser(
         description='Convert GTA annotations to TrainIds')
-    parser.add_argument('gta_path', help='gta data path')
+    #parser.add_argument('gta_path', help='gta data path')
     parser.add_argument('--gt-dir', default='labels', type=str)
-    parser.add_argument('-o', '--out-dir', help='output path')
+    #parser.add_argument('-o', '--out-dir', help='output path')
     parser.add_argument(
         '--nproc', default=1, type=int, help='number of process')
     args = parser.parse_args()
