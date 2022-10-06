@@ -150,8 +150,7 @@ def main():
         with open(osp.join(out_dir, 'sample_class_stats.json'), 'r') as of:
             sample_class_stats = json.load(of)
     '''
-    sample_class_stats = mmcv.track_progress(convert_to_train_id, poly_files)
-    pdb.set_trace()
+    sample_class_stats = mmcv.track_progress(get_class_stats, poly_files)
     save_class_stats(out_dir, sample_class_stats)
 
 
