@@ -154,7 +154,7 @@ def main():
             sample_class_stats = json.load(of)
     '''
     sample_class_stats = mmcv.track_progress(convert_to_train_id, poly_files)
-
+    pdb.set_trace()
     save_class_stats(out_dir, sample_class_stats)
 
 
