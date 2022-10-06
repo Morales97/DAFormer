@@ -10,7 +10,7 @@ import os.path as osp
 import mmcv
 import numpy as np
 from PIL import Image
-
+import pdb
 
 def convert_to_train_id(file):
     # re-assign labels to match the format of Cityscapes
@@ -51,6 +51,44 @@ def convert_to_train_id(file):
     Image.fromarray(label_copy, mode='L').save(new_file)
     return sample_class_stats
 
+def get_class_stats(file):
+    '''
+    DM
+    '''
+    pil_label = Image.open(file)
+    label = np.asarray(pil_label)
+    id_to_trainid = {
+        7: 0,
+        8: 1,
+        11: 2,
+        12: 3,
+        13: 4,
+        17: 5,
+        19: 6,
+        20: 7,
+        21: 8,
+        22: 9,
+        23: 10,
+        24: 11,
+        25: 12,
+        26: 13,
+        27: 14,
+        28: 15,
+        31: 16,
+        32: 17,
+        33: 18
+    }
+    sample_class_stats = {}
+    for k, v in id_to_trainid.items():
+        k_mask = label == k
+        n = int(np.sum(k_mask))
+        if n > 0:
+            sample_class_stats[v] = n
+    new_file = file.replace('.png', '_labelTrainIds.png')
+    assert file != new_file
+    sample_class_stats['file'] = new_file
+    Image.fromarray(label_copy, mode='L').save(new_file)
+    return sample_class_stats
 
 def parse_args():
     parser = argparse.ArgumentParser(
@@ -59,7 +97,7 @@ def parse_args():
     parser.add_argument('--gt-dir', default='labels', type=str)
     parser.add_argument('-o', '--out-dir', help='output path')
     parser.add_argument(
-        '--nproc', default=4, type=int, help='number of process')
+        '--nproc', default=1, type=int, help='number of process')
     args = parser.parse_args()
     return args
 
@@ -88,20 +126,21 @@ def save_class_stats(out_dir, sample_class_stats):
 
 def main():
     args = parse_args()
-    gta_path = args.gta_path
-    out_dir = args.out_dir if args.out_dir else gta_path
+    gta_path = '/home/danmoral/ssda/data/gta5test/' #args.gta_path
+    out_dir = '/home/danmoral/ssda/data/gta5test/' #args.out_dir if args.out_dir else gta_path
     mmcv.mkdir_or_exist(out_dir)
 
-    gt_dir = osp.join(gta_path, args.gt_dir)
+    gt_dir = osp.join(gta_path, 'labels') #args.gt_dir)
 
     poly_files = []
     for poly in mmcv.scandir(
-            gt_dir, suffix=tuple(f'{i}.png' for i in range(10)),
+            gt_dir, suffix=tuple(f'{i}.jpg' for i in range(10)), #gt_dir, suffix=tuple(f'{i}.png' for i in range(10)),
             recursive=True):
         poly_file = osp.join(gt_dir, poly)
         poly_files.append(poly_file)
     poly_files = sorted(poly_files)
 
+    '''
     only_postprocessing = False
     if not only_postprocessing:
         if args.nproc > 1:
@@ -113,6 +152,8 @@ def main():
     else:
         with open(osp.join(out_dir, 'sample_class_stats.json'), 'r') as of:
             sample_class_stats = json.load(of)
+    '''
+    sample_class_stats = mmcv.track_progress(convert_to_train_id, poly_files)
 
     save_class_stats(out_dir, sample_class_stats)
 
