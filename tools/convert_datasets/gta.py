@@ -123,7 +123,7 @@ def save_class_stats(out_dir, sample_class_stats):
 
 def main():
     args = parse_args()
-    gta_path = '/home/danmoral/ssda/data/gta5test/' #args.gta_path
+    gta_path = '/home/danmoral/ssda/data/gta5/' #args.gta_path
     out_dir = '/home/danmoral/ssda/data/gta5test/' #args.out_dir if args.out_dir else gta_path
     mmcv.mkdir_or_exist(out_dir)
 
