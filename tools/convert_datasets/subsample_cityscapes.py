@@ -79,7 +79,7 @@ def main():
 
     idxs = np.arange(len(files))
     idxs = np.random.permutation(idxs)
-    labeled_files = (np.array(files)[idxs[:n_labeled_samples]]).to_list()
+    labeled_files = (np.array(files)[idxs[:n_labeled_samples]]).tolist()
     pdb.set_trace()
 
     only_postprocessing = False
