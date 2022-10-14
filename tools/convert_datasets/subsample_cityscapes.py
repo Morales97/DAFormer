@@ -2,6 +2,7 @@
 
 import argparse
 import json
+import os
 import os.path as osp
 
 import mmcv
@@ -67,24 +68,42 @@ def save_class_stats(out_dir, sample_class_stats):
 def main():
     args = parse_args()
     cityscapes_path = args.cityscapes_path
-    new_cityscapes_path = 'data/CS_100_s1/images'
+    new_cityscapes_path_img = 'data/CS_100_s1/images'
+    new_cityscapes_path_lbl = 'data/CS_100_s1/labels'
     seed = 1
     n_labeled_samples = 100
 
     gt_dir = osp.join(cityscapes_path, args.gt_dir)
 
+    # get all CS images
     files = []
     for f in mmcv.scandir(osp.join(cityscapes_path, 'leftImg8bit/train'), '.png', recursive=True):
         files.append(osp.join(cityscapes_path, 'leftImg8bit/train', f))
     assert len(files) == 2975
 
+    # select random 100 images
     idxs = np.arange(len(files))
     idxs = np.random.permutation(idxs)
     labeled_files = (np.array(files)[idxs[:n_labeled_samples]]).tolist()
-   
+    
+    # copy selected images in new folder
     for f in labeled_files:
-        shutil.copy(f, new_cityscapes_path)
+        shutil.copy(f, new_cityscapes_path_img)
+        f_split = f.split(os.sep)
+        label = osp.join(gt_dir, f_split[-2], f_split[-1][:-15], 'labelTrainIds.png')
+        shutil.copy(label, new_cityscapes_path_lbl)
         pdb.set_trace()
+
+    # copy labels
+    labels = []
+    for f in mmcv.scandir(osp.join(cityscapes_path, 'gtFine/train'), 'labelTrainIds.png', recursive=True):
+        files.append(osp.join(cityscapes_path, 'leftImg8bit/train', f))
+
+    for f in labeled_files:
+        f_split = f.split(os.sep)
+        label = osp.join(gt_dir, f_split[-2], f_split[-1][:-15], 'labelTrainIds.png')
+        shutil.copy(label, new_cityscapes_path_lbl)
+
 
     only_postprocessing = False
     if not only_postprocessing:
