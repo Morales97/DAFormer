@@ -101,7 +101,7 @@ def main():
 
     for f in labeled_files:
         f_split = f.split(os.sep)
-        label = osp.join(gt_dir, f_split[-2], f_split[-1][:-15] + 'labelTrainIds.png')
+        label = osp.join(gt_dir, f_split[-3], f_split[-2], f_split[-1][:-15] + 'labelTrainIds.png') # -3: train, -2: <city>, -1: <sample>
         shutil.copy(label, new_cityscapes_path_lbl)
 
 
