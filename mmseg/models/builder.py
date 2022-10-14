@@ -49,12 +49,10 @@ def build_train_model(cfg, train_cfg=None, test_cfg=None):
         'train_cfg specified in both outer field and model field '
     assert cfg.model.get('test_cfg') is None or test_cfg is None, \
         'test_cfg specified in both outer field and model field '
-    pdb.set_trace()
     if 'uda' in cfg:
         cfg.uda['model'] = cfg.model
         cfg.uda['max_iters'] = cfg.runner.max_iters
-        return UDA.build(
-            cfg.uda, default_args=dict(train_cfg=train_cfg, test_cfg=test_cfg))
+        return UDA.build(cfg.uda, default_args=dict(train_cfg=train_cfg, test_cfg=test_cfg))
     else:
         return SEGMENTORS.build(
             cfg.model,
