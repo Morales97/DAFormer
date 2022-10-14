@@ -67,12 +67,19 @@ def main():
     args = parse_args()
     cityscapes_path = args.cityscapes_path
     new_cityscapes_path = None # TODO
+    seed = 1
+    n_labeled_samples = 100
 
     gt_dir = osp.join(cityscapes_path, args.gt_dir)
 
     files = []
     for f in mmcv.scandir(osp.join(cityscapes_path, 'leftImg8bit/train'), '.png', recursive=True):
         files.append(f)
+    assert len(files) == 2975
+
+    idxs = np.arange(len(files))
+    idxs = np.random.permutation(idxs)
+    labeled_files = files[idxs[:n_labeled_samples]]
     pdb.set_trace()
 
     only_postprocessing = False
