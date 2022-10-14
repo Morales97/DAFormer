@@ -15,7 +15,7 @@ from mmseg.core import DistEvalHook, EvalHook
 from mmseg.core.ddp_wrapper import DistributedDataParallelWrapper
 from mmseg.datasets import build_dataloader, build_dataset
 from mmseg.utils import get_root_logger
-
+import pdb
 
 def set_random_seed(seed, deterministic=False):
     """Set random seed.
@@ -128,4 +128,5 @@ def train_segmentor(model,
         runner.resume(cfg.resume_from)
     elif cfg.load_from:
         runner.load_checkpoint(cfg.load_from)
+    pdb.set_trace()
     runner.run(data_loaders, cfg.workflow)
