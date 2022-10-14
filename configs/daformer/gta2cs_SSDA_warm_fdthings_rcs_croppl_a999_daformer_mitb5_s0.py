@@ -44,13 +44,13 @@ optimizer = dict(
             pos_block=dict(decay_mult=0.0),
             norm=dict(decay_mult=0.0))))
 n_gpus = 1
-#runner = dict(type='IterBasedRunner', max_iters=40000)
-runner = dict(type='IterBasedRunner', max_iters=200)
+runner = dict(type='IterBasedRunner', max_iters=40000)
+#runner = dict(type='IterBasedRunner', max_iters=200)
 # Logging Configuration
-#checkpoint_config = dict(by_epoch=False, interval=40000, max_keep_ckpts=1)
-checkpoint_config = dict(by_epoch=False, interval=200, max_keep_ckpts=1)
-#evaluation = dict(interval=4000, metric='mIoU')
-evaluation = dict(interval=200, metric='mIoU')
+checkpoint_config = dict(by_epoch=False, interval=40000, max_keep_ckpts=1)
+#checkpoint_config = dict(by_epoch=False, interval=200, max_keep_ckpts=1)
+evaluation = dict(interval=4000, metric='mIoU')
+#evaluation = dict(interval=200, metric='mIoU')
 # Meta Information for Result Analysis
 name = 'gta2cs_uda_warm_fdthings_rcs_croppl_a999_daformer_mitb5_s0'
 exp = 'basic'
