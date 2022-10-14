@@ -208,7 +208,6 @@ class DACS(UDADecorator):
         log_vars = {}
         batch_size = img.shape[0]
         dev = img.device
-        pdb.set_trace()
         # Init/update ema model
         if self.local_iter == 0:
             self._init_ema_weights()

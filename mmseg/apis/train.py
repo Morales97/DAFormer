@@ -128,5 +128,4 @@ def train_segmentor(model,
         runner.resume(cfg.resume_from)
     elif cfg.load_from:
         runner.load_checkpoint(cfg.load_from)
-    pdb.set_trace()
     runner.run(data_loaders, cfg.workflow)
