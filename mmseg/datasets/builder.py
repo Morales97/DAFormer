@@ -66,14 +66,14 @@ def _concat_dataset(cfg, default_args=None):
 def build_dataset(cfg, default_args=None):
     """Build datasets."""
     from .dataset_wrappers import ConcatDataset, RepeatDataset
-    from mmseg.datasets import UDADataset
+    from mmseg.datasets import UDADataset, SSDADataset
     if cfg['type'] == 'UDADataset':
         dataset = UDADataset(
             source=build_dataset(cfg['source'], default_args),
             target=build_dataset(cfg['target'], default_args),
             cfg=cfg)
     if cfg['type'] == 'SSDADataset':
-        dataset = UDADataset(
+        dataset = SSDADataset(
             source=build_dataset(cfg['source'], default_args),
             target=build_dataset(cfg['target'], default_args),
             target_labeled=build_dataset(cfg['target_labeled'], default_args),

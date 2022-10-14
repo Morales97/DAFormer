@@ -40,7 +40,7 @@ def get_rcs_class_probs(data_root, temperature):
 
 
 @DATASETS.register_module()
-class UDADataset(object):
+class SSDADataset(object):
 
     def __init__(self, source, target_labeled, target, cfg):
         self.source = source
