@@ -9,6 +9,7 @@ import numpy as np
 from cityscapesscripts.preparation.json2labelImg import json2labelImg
 from PIL import Image
 import pdb
+import shutil
 
 def convert_json_to_label(json_file):
     label_file = json_file.replace('_polygons.json', '_labelTrainIds.png')
@@ -66,7 +67,7 @@ def save_class_stats(out_dir, sample_class_stats):
 def main():
     args = parse_args()
     cityscapes_path = args.cityscapes_path
-    new_cityscapes_path = None # TODO
+    new_cityscapes_path = 'data/CS_100_s1/images'
     seed = 1
     n_labeled_samples = 100
 
@@ -74,13 +75,16 @@ def main():
 
     files = []
     for f in mmcv.scandir(osp.join(cityscapes_path, 'leftImg8bit/train'), '.png', recursive=True):
-        files.append(f)
+        files.append(osp.join(cityscapes_path, 'leftImg8bit/train', f))
     assert len(files) == 2975
 
     idxs = np.arange(len(files))
     idxs = np.random.permutation(idxs)
     labeled_files = (np.array(files)[idxs[:n_labeled_samples]]).tolist()
-    pdb.set_trace()
+   
+    for f in labeled_files:
+        shutil.copy(f, new_cityscapes_path)
+        pdb.set_trace()
 
     only_postprocessing = False
     if not only_postprocessing:
