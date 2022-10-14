@@ -50,10 +50,10 @@ def calc_grad_magnitude(grads, norm_type=2.0):
 
 
 @UDA.register_module()
-class DACS(UDADecorator):
+class SSDA_DACS(UDADecorator):
 
     def __init__(self, **cfg):
-        super(DACS, self).__init__(**cfg)
+        super(SSDA_DACS, self).__init__(**cfg)
         self.local_iter = 0
         self.max_iters = cfg['max_iters']
         self.alpha = cfg['alpha']

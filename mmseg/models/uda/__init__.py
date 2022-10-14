@@ -4,5 +4,6 @@
 # ---------------------------------------------------------------
 
 from mmseg.models.uda.dacs import DACS
+from mmseg.models.uda.ssda_dacs import SSDA_DACS
 
-__all__ = ['DACS']
+__all__ = ['DACS', 'SSDA_DACS']
