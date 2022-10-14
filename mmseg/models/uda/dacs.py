@@ -27,7 +27,7 @@ from mmseg.models.utils.dacs_transforms import (denorm, get_class_masks,
                                                 get_mean_std, strong_transform)
 from mmseg.models.utils.visualization import subplotimg
 from mmseg.utils.utils import downscale_label_ratio
-
+import pdb
 
 def _params_equal(ema_model, model):
     for ema_param, param in zip(ema_model.named_parameters(),
@@ -208,7 +208,7 @@ class DACS(UDADecorator):
         log_vars = {}
         batch_size = img.shape[0]
         dev = img.device
-
+        pdb.set_trace()
         # Init/update ema model
         if self.local_iter == 0:
             self._init_ema_weights()
