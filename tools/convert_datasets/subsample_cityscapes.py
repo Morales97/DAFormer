@@ -71,7 +71,7 @@ def main():
     gt_dir = osp.join(cityscapes_path, args.gt_dir)
 
     files = []
-    for f in mmcv.scandir(osp.join(cityscapes_path, 'train'), '.png', recursive=True):
+    for f in mmcv.scandir(osp.join(cityscapes_path, 'leftImg8bit/train'), '.png', recursive=True):
         files.append(f)
     pdb.set_trace()
 
