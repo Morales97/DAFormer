@@ -107,7 +107,7 @@ class SSDADataset(object):
         i2 = np.random.choice(range(len(self.target)))
         s2 = self.target[i2]
         i3 = np.random.choice(range(len(self.target_labeled)))
-        s2 = self.target_labeled[i3]
+        s3 = self.target_labeled[i3]
 
         return {
             **s1, 'target_img_metas': s2['img_metas'],
