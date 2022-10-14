@@ -72,6 +72,12 @@ def build_dataset(cfg, default_args=None):
             source=build_dataset(cfg['source'], default_args),
             target=build_dataset(cfg['target'], default_args),
             cfg=cfg)
+    if cfg['type'] == 'SSDADataset':
+        dataset = UDADataset(
+            source=build_dataset(cfg['source'], default_args),
+            target=build_dataset(cfg['target'], default_args),
+            target_labeled=build_dataset(cfg['target_labeled'], default_args),
+            cfg=cfg)
     elif isinstance(cfg, (list, tuple)):
         dataset = ConcatDataset([build_dataset(c, default_args) for c in cfg])
     elif cfg['type'] == 'RepeatDataset':
