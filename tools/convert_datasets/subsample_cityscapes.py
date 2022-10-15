@@ -16,7 +16,7 @@ import shutil
 def parse_args():
     parser = argparse.ArgumentParser(
         description='Convert Cityscapes annotations to TrainIds')
-    parser.add_argument('cityscapes_path', help='cityscapes data path')
+    parser.add_argument('cityscapes_path', default='data/cityscapes', help='cityscapes data path')
     parser.add_argument('--gt-dir', default='gtFine', type=str)
     parser.add_argument('-o', '--out-dir', help='output path')
     args = parser.parse_args()
@@ -25,7 +25,7 @@ def parse_args():
 def main():
     args = parse_args()
     cityscapes_path = args.cityscapes_path
-    new_cityscapes_path_img = 'data/CS_100_s2/images'
+    new_cityscapes_path_img = 'data/CS_100_s2/images'   # NOTE need to make these dirs before running
     new_cityscapes_path_lbl = 'data/CS_100_s2/labels'
     seed = 2
     n_labeled_samples = 100
