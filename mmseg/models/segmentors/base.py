@@ -170,7 +170,6 @@ class BaseSegmentor(BaseModule, metaclass=ABCMeta):
                 all the variables to be sent to the logger.
         """
         log_vars = OrderedDict()
-        pdb.set_trace()
         for loss_name, loss_value in losses.items():
             if isinstance(loss_value, torch.Tensor):
                 log_vars[loss_name] = loss_value.mean()
