@@ -174,6 +174,8 @@ class BaseSegmentor(BaseModule, metaclass=ABCMeta):
         for loss_name, loss_value in losses.items():
             if isinstance(loss_value, torch.Tensor):
                 log_vars[loss_name] = loss_value.mean()
+            elif isinstance(loss_value, tuple): # DM: fix to use DLv2
+                loss_value = list(loss_value)
             elif isinstance(loss_value, list):
                 log_vars[loss_name] = sum(_loss.mean() for _loss in loss_value)
             else:
