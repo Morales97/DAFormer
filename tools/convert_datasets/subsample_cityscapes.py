@@ -16,7 +16,7 @@ import shutil
 def parse_args():
     parser = argparse.ArgumentParser(
         description='Convert Cityscapes annotations to TrainIds')
-    parser.add_argument('cityscapes_path', default='data/cityscapes', help='cityscapes data path')
+    parser.add_argument('--cityscapes_path', default='data/cityscapes', help='cityscapes data path')
     parser.add_argument('--gt-dir', default='gtFine', type=str)
     parser.add_argument('-o', '--out-dir', help='output path')
     args = parser.parse_args()
