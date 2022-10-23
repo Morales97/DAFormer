@@ -25,9 +25,9 @@ def parse_args():
 def main():
     args = parse_args()
     cityscapes_path = args.cityscapes_path
-    new_cityscapes_path_img = 'data/CS_200_s3/images'   # NOTE need to make these dirs before running
-    new_cityscapes_path_lbl = 'data/CS_200_s3/labels'
-    seed = 3
+    new_cityscapes_path_img = 'data/CS_200_s2/images'   # NOTE need to make these dirs before running
+    new_cityscapes_path_lbl = 'data/CS_200_s2/labels'
+    seed = 2
     n_labeled_samples = 200
 
     gt_dir = osp.join(cityscapes_path, args.gt_dir)
