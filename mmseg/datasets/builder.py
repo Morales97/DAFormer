@@ -72,7 +72,7 @@ def build_dataset(cfg, default_args=None):
             source=build_dataset(cfg['source'], default_args),
             target=build_dataset(cfg['target'], default_args),
             cfg=cfg)
-    if cfg['type'] == 'SSDADataset':
+    elif cfg['type'] == 'SSDADataset':
         dataset = SSDADataset(
             source=build_dataset(cfg['source'], default_args),
             target=build_dataset(cfg['target'], default_args),
