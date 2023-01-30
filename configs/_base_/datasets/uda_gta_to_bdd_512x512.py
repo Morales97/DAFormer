@@ -4,8 +4,8 @@
 # ---------------------------------------------------------------
 
 # dataset settings
-dataset_type = 'CityscapesDataset'
-data_root = 'data/cityscapes/'
+dataset_type = 'BDDDataset'
+data_root = 'data/bdd100k/'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 crop_size = (512, 512)
@@ -62,20 +62,20 @@ data = dict(
             ann_dir='labels',
             pipeline=gta_train_pipeline),
         target=dict(
-            type='CityscapesDataset',
-            data_root='data/cityscapes/',
-            img_dir='leftImg8bit/train',
-            ann_dir='gtFine/train',
+            type='BDDDataset',
+            data_root='data/bdd100k/',
+            img_dir='images/10k/train',
+            ann_dir='labels/sem_seg/masks/train',
             pipeline=cityscapes_train_pipeline)),
     val=dict(
-        type='CityscapesDataset',
-        data_root='data/cityscapes/',
-        img_dir='leftImg8bit/val',
-        ann_dir='gtFine/val',
+        type='BDDDataset',
+        data_root='data/bdd100k/',
+        img_dir='images/10k/val',
+        ann_dir='labels/sem_seg/masks/val',
         pipeline=test_pipeline),
     test=dict(
-        type='CityscapesDataset',
-        data_root='data/cityscapes/',
-        img_dir='leftImg8bit/val',
-        ann_dir='gtFine/val',
+        type='BDDDataset',
+        data_root='data/bdd100k/',
+        img_dir='images/10k/val',
+        ann_dir='labels/sem_seg/masks/val',
         pipeline=test_pipeline))
