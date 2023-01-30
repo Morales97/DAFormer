@@ -6,7 +6,7 @@
 _base_ = [
     '../_base_/default_runtime.py',
     # DAFormer Network Architecture
-    '../_base_/models/daformer_sepaspp_mitb5.py',
+    '../_base_/models/deeplabv2_r101.py',
     # GTA->Cityscapes Data Loading
     '../_base_/datasets/uda_synthia_to_cityscapes_512x512.py',
     # Basic UDA Self-Training
@@ -52,9 +52,9 @@ checkpoint_config = dict(by_epoch=False, interval=40000, max_keep_ckpts=1)
 evaluation = dict(interval=4000, metric='mIoU')
 #evaluation = dict(interval=200, metric='mIoU')
 # Meta Information for Result Analysis
-name = 'gta2cs_uda_warm_fdthings_rcs_croppl_a999_daformer_mitb5_s0'
+name = 'syn2cs_uda_warm_fdthings_rcs_croppl_a999_daformer_mitb5_s0'
 exp = 'basic'
-name_dataset = 'gta2cityscapes'
+name_dataset = 'syn2cityscapes'
 name_architecture = 'daformer_sepaspp_mitb5'
 name_encoder = 'mitb5'
 name_decoder = 'daformer_sepaspp'
